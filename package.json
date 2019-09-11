@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-pagination-dot",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "simple pagination dot",
   "main": "src/index.js",
   "repository": {
@@ -12,7 +12,10 @@
     "dot",
     "react-native",
     "instagram",
-
+    "scroll",
+    "scrollable",
+    "page",
+    "paginate"
   ],
   "author": "pratt",
   "license": "MIT",
