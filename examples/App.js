@@ -6,109 +6,71 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import PaginationDot from 'react-native-animated-pagination-dot';
+
+const TestDotContainer = ( {color, maxPage=10} )=>{
+
+  const [page, setPage] = useState(0);
+
+  return (
+      <View style={{flex:1,}}>
+          <View style={{flex:1, flexDirection:'row'}}>
+              <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center', marginRight:12}}>
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: 'black',}}>current</Text>
+                  <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>{page+1}</Text>
+              </View>
+              <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center', marginLeft:12}}>
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: 'black',}}>max</Text>
+                  <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>{maxPage}</Text>
+              </View>
+          </View>
+          <View style={{flex:2, justifyContent:'space-between', flexDirection:'row', alignItems:'center' }}>
+            <Button
+                title="Prev"
+                onPress={()=>{
+                    setPage(page-1);
+              }}/>
+
+            <PaginationDot activeDotColor={color} containerWidth={90} curPage={page} maxPage={maxPage}/>
+
+            <Button
+                title="Next"
+                onPress={()=>{
+                    setPage(page+1);
+                }}/>
+          </View>
+      </View>
+  )
+}
 
 const App = () => {
   return (
-    <Fragment>
+    <View style={{flex:1,}}>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+        <View style={{ flex:1, backgroundColor:'white'}}>
+          <View style={{flex:1, justifyContent:'center', alignItems:'flex-start',padding:20 }}>
+            <Text style={{
+              fontSize: 24,
+                fontWeight: '600',
+                color: 'black',}}>Animated Pagination Dots</Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
+            <View style={{flex:2, flexDirection:'column', paddingVertical:30, paddingHorizontal:20, marginBottom:20 }}>
+              <TestDotContainer maxPage={20} color={'black'} />
+              <TestDotContainer maxPage={10} color={'red'} />
+              <TestDotContainer maxPage={4}  color={'green'} />
+              <TestDotContainer maxPage={5}  color={'blue'} />
+            </View>
+        </View>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
