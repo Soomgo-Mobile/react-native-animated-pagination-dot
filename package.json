@@ -2,7 +2,7 @@
   "name": "react-native-animated-pagination-dot",
   "version": "0.0.1",
   "description": "simple pagination dot",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rouge3351/react-native-animated-pagination-dot.git"
@@ -17,6 +17,16 @@
   },
   "homepage": "https://github.com/rouge3351/react-native-animated-pagination-dot#readme"
   "devDependencies": {
-    "metro-react-native-babel-preset": "^0.56.0"
+    "eslint": "^6.3.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react": "^16.9.0",
+    "react-native": "^0.60.5"
+  },
+  "peerDependencies": {
+    "react": ">= 16.x",
+    "react-native": ">=0.60.x"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
   }
 }
