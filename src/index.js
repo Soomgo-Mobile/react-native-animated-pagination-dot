@@ -3,7 +3,7 @@
  * Created by rouge on 11/09/2019.
  */
 import React from 'react';
-import {ScrollView, View, Platform} from "react-native";
+import {ScrollView, View, Platform, StyleSheet} from "react-native";
 import Dot from './component/Dot';
 import EmptyDot from './component/EmptyDot';
 import PropTypes from "prop-types";
@@ -16,13 +16,21 @@ class DotContainer extends React.Component{
             this.scrollTo(this.props.curPage)
     }
 
-
     render () {
         const { curPage, maxPage, activeDotColor } = this.props;
         const list = [ ...Array(maxPage).keys() ];
 
-        if (maxPage < 5) {
 
+        let normalizedPage = curPage;
+        if(curPage < 0){
+            normalizedPage = 0;
+        }
+
+        if(curPage > maxPage-1){
+            normalizedPage = maxPage-1
+        }
+
+        if (maxPage < 5) {
             return (
                 <View style={ styles.container }>
                     { list.map(i => {
@@ -30,15 +38,16 @@ class DotContainer extends React.Component{
                             <Dot
                                 key={ i }
                                 idx={ i }
-                                curPage={ curPage }
+                                curPage={ normalizedPage }
                                 maxPage={ maxPage }
+                                activeColor={activeDotColor}
                             />
                         );
                     }) }
                 </View>
             )
-
         }
+
         const { containerWidth = 84 } = this.props;
 
         return (
@@ -67,7 +76,7 @@ class DotContainer extends React.Component{
                             <Dot
                                 key={ i }
                                 idx={ i }
-                                curPage={ curPage }
+                                curPage={ normalizedPage }
                                 maxPage={ maxPage }
                                 activeColor={activeDotColor}
                             />
@@ -91,6 +100,15 @@ class DotContainer extends React.Component{
         });
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    }
+});
+
+
 
 DotContainer.propTypes = {
     containerWidth:PropTypes.number,
