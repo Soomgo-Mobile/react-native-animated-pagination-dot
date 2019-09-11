@@ -1,0 +1,19 @@
+{
+  "name": "react-native-animated-pagination-dot",
+  "version": "0.0.1",
+  "description": "simple pagination dot",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rouge3351/react-native-animated-pagination-dot.git"
+  },
+  "keywords": [
+    "pagination"
+  ],
+  "author": "pratt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rouge3351/react-native-animated-pagination-dot/issues"
+  },
+  "homepage": "https://github.com/rouge3351/react-native-animated-pagination-dot#readme"
+}
