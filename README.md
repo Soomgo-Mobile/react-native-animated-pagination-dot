@@ -64,12 +64,6 @@ export default ExampleDotPaginate;
 ## API
 
 ### Props
-    containerWidth:PropTypes.number,
-    curPage:PropTypes.number,
-    maxPage:PropTypes.number,
-    activeDotColor:PropTypes.string
-    
-All the `ScrollView`/`FlatList` props will be passed.
 
 | **Prop**                    | **Type**                         | **Description**                                     |
 | --------------------------- | -------------------------------- | --------------------------------------------------- |
