@@ -16,4 +16,7 @@
     "url": "https://github.com/rouge3351/react-native-animated-pagination-dot/issues"
   },
   "homepage": "https://github.com/rouge3351/react-native-animated-pagination-dot#readme"
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.56.0"
+  }
 }
