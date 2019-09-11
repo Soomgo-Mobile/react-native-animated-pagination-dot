@@ -12,3 +12,6 @@ dist
 
 # Dependency directory
 node_modules
+
+# Lock
+package-lock.json
