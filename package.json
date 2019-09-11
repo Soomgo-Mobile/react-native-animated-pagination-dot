@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-pagination-dot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "simple pagination dot",
   "main": "src/index.js",
   "repository": {
