@@ -6,7 +6,6 @@ Paginate component for React native simple dot with **moving animation**
 -----
 <p>
 <img src="https://img.shields.io/npm/dm/react-native-animated-pagination-dot.svg" />
-<img src="https://img.shields.io/npm/dt/react-native-animated-pagination-dot.svg" />
 </p>
 
 
@@ -38,6 +37,7 @@ class ExampleDotPaginate extends React.Component {
     
     render(){
         const {currentPage, maxPage} = this.state;
+        const color = 'black';
         
         return (
             <View style={{flex:1,}}>
