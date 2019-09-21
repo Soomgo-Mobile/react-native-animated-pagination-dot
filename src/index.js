@@ -11,6 +11,10 @@ import PropTypes from "prop-types";
 
 class DotContainer extends React.Component{
 
+    componentDidMount(){
+        this.scrollTo(this.props.curPage);
+    }
+
     componentDidUpdate (prevProps){
         if (this.props.maxPage > 4 && prevProps.curPage !== this.props.curPage)
             this.scrollTo(this.props.curPage)
