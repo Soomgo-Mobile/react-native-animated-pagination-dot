@@ -11,8 +11,13 @@ import PropTypes from "prop-types";
 
 class DotContainer extends React.Component{
 
-    componentDidMount(){
-        this.scrollTo(this.props.curPage);
+    shouldComponentUpdate (nextProps) {
+        if (this.props.curPage === nextProps.curPage) {
+            // prevent unnecessary re-render caused by external change
+            return false;
+        }
+
+        return true;
     }
 
     componentDidUpdate (prevProps){
@@ -55,7 +60,11 @@ class DotContainer extends React.Component{
         const { containerWidth = 84 } = this.props;
 
         return (
-            <View style={ styles.container }>
+            <View style={ styles.container }
+                onLayout={()=>{
+                    // scroll to right index on initial render
+                    this.scrollTo(this.props.curPage, false);
+                }}>
                 <ScrollView
                     ref="_scrollView"
                     style={ {
@@ -97,10 +106,10 @@ class DotContainer extends React.Component{
     }
 
 
-    scrollTo (index) {
+    scrollTo (index, animated = true) {
         this.refs._scrollView.scrollTo({
             x: Math.max(0, 18 + ( index - 4 ) * 9),
-            animated: true
+            animated,
         });
     }
 }
