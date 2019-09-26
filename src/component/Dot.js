@@ -55,7 +55,7 @@ class Dot extends React.Component {
         const { prevType, type } = this.state;
 
         if (curPage < 3) {
-            if (idx >= 4)
+            if (idx >= 5)
                 return (
                     <EmptyDot />
                 );
