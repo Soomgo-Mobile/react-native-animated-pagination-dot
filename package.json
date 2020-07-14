@@ -24,9 +24,10 @@
   },
   "homepage": "https://github.com/rouge3351/react-native-animated-pagination-dot#readme",
   "devDependencies": {
-    "prop-types": "^15.7.2",
+    "@types/react-native": "^0.62.2",
     "eslint": "^6.3.0",
-    "metro-react-native-babel-preset": "^0.56.0"
+    "metro-react-native-babel-preset": "^0.56.0",
+    "prop-types": "^15.7.2"
   },
   "peerDependencies": {
     "react": ">= 16.x",
