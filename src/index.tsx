@@ -8,7 +8,6 @@ import React from 'react';
 import {ScrollView, View, Platform, StyleSheet} from "react-native";
 import Dot from './component/Dot';
 import EmptyDot from './component/EmptyDot';
-import PropTypes from "prop-types";
 
 export interface IDotContainerProps {
     curPage:number;
