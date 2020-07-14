@@ -1,19 +1,28 @@
 /**
  *
  * Created by rouge on 11/09/2019.
+ * Converted to Typescript on 14/07/2020.
+ *
  */
 import React from "react";
 import {Animated} from "react-native";
-import PropTypes from 'prop-types';
 
 import EmptyDot from './EmptyDot';
-import GetDotStyle from '../util/GetDotStyle'
+import {
+    IPropsDot,
+    IStateDot,
+} from './types/Dot';
+import { getDotStyle } from '../util/DotUtils';
 
-class Dot extends React.Component {
+class Dot extends React.Component<IPropsDot, IStateDot> {
     constructor (props) {
         super(props);
 
-        const type = GetDotStyle(props.idx, props.curPage, props.maxPage);
+        const type = getDotStyle({
+            idx:props.idx,
+            curPage:props.curPage,
+            maxPage:props.maxPage,
+        });
 
         this.state = {
             animVal: new Animated.Value(0),
@@ -25,7 +34,11 @@ class Dot extends React.Component {
     }
 
     static getDerivedStateFromProps (nextProps, prevState) {
-        const nextType = GetDotStyle(nextProps.idx, nextProps.curPage, nextProps.maxPage);
+        const nextType = getDotStyle({
+            idx:nextProps.idx,
+            curPage:nextProps.curPage,
+            maxPage:nextProps.maxPage,
+        });
         const prevType = prevState.type;
 
         return {
@@ -37,7 +50,7 @@ class Dot extends React.Component {
 
     componentDidUpdate () {
 
-        if (this.state.animate === false) return;
+        if (!this.state.animate) return;
 
         this.state.animVal.setValue(0);
 
@@ -45,13 +58,14 @@ class Dot extends React.Component {
             this.state.animVal, {
                 toValue: 1,
                 duration: 300,
+                useNativeDriver:false
             },
         ).start();
     }
 
 
     render () {
-        const { idx, curPage, maxPage } = this.props;
+        const { idx, curPage } = this.props;
         const { prevType, type } = this.state;
 
         if (curPage < 3) {
@@ -101,12 +115,5 @@ class Dot extends React.Component {
     }
 
 }
-
-Dot.propTypes = {
-    idx: PropTypes.number,
-    curPage:PropTypes.number,
-    maxPage:PropTypes.number,
-    activeColor:PropTypes.string
-};
 
 export default Dot;
