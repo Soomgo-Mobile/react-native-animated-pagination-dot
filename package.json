@@ -1,12 +1,13 @@
 {
   "name": "react-native-animated-pagination-dot",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "simple pagination dot",
   "main": "src/index.tsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rouge3351/react-native-animated-pagination-dot.git"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "keywords": [
     "pagination",
     "dot",
@@ -17,7 +18,7 @@
     "page",
     "paginate"
   ],
-  "author": "pratt",
+  "author": "Pratt Yeon <rouge3351@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rouge3351/react-native-animated-pagination-dot/issues"
@@ -26,7 +27,7 @@
   "devDependencies": {
     "@types/react-native": "^0.62.2",
     "eslint": "^6.3.0",
-    "metro-react-native-babel-preset": "^0.56.0",
+    "metro-react-native-babel-preset": "^0.56.0"
   },
   "peerDependencies": {
     "react": ">= 16.x",
