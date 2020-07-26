@@ -1,15 +1,24 @@
 /**
  *
  * Created by rouge on 11/09/2019.
+ * Converted to Typescript on 14/07/2020.
+ *
  */
 import React from 'react';
 import {ScrollView, View, Platform, StyleSheet} from "react-native";
 import Dot from './component/Dot';
 import EmptyDot from './component/EmptyDot';
-import PropTypes from "prop-types";
+
+export interface IDotContainerProps {
+    curPage:number;
+    maxPage:number;
+    containerWidth?:number;
+    activeDotColor:string;
+}
 
 
-class DotContainer extends React.Component{
+class DotContainer extends React.Component<IDotContainerProps>{
+    private refScrollView:ScrollView|null = null;
 
     shouldComponentUpdate (nextProps) {
         if (this.props.curPage === nextProps.curPage) {
@@ -66,14 +75,15 @@ class DotContainer extends React.Component{
                     this.scrollTo(this.props.curPage, false);
                 }}>
                 <ScrollView
-                    ref="_scrollView"
+                    ref={(ref)=>{
+                        this.refScrollView = ref;
+                    }}
                     style={ {
                         maxWidth: containerWidth,
                     } }
                     contentContainerStyle={ {
                         alignItems: 'center',
                     } }
-                    scalesPageToFit={ Platform.OS === 'android' }
                     bounces={ false }
                     horizontal={ true }
                     scrollEnabled={ false }
@@ -107,7 +117,9 @@ class DotContainer extends React.Component{
 
 
     scrollTo (index, animated = true) {
-        this.refs._scrollView.scrollTo({
+        if(!this.refScrollView) return;
+
+        this.refScrollView.scrollTo({
             x: Math.max(0, 18 + ( index - 4 ) * 9),
             animated,
         });
@@ -120,14 +132,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 });
-
-
-
-DotContainer.propTypes = {
-    containerWidth:PropTypes.number,
-    curPage:PropTypes.number,
-    maxPage:PropTypes.number,
-    activeDotColor:PropTypes.string
-};
 
 export default DotContainer;

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "allowJs": false,
+    "checkJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": [
+      "es6"
+    ],
+    "skipLibCheck": true,
+    "removeComments": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "module": "esnext",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "strict": true,
+    "downlevelIteration": true
+  },
+  "compileOnSave": true,
+  "exclude": [ ]
+}
