@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.8.6",
     "react-native": "0.60.5",
-    "react-native-animated-pagination-dot": "^0.1.2"
+    "react-native-animated-pagination-dot": "^0.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
