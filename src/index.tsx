@@ -13,6 +13,7 @@ export interface IDotContainerProps {
     curPage:number;
     maxPage:number;
     containerWidth?:number;
+    sizeRatio?:number;
     activeDotColor:string;
 }
 
@@ -56,6 +57,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
                             <Dot
                                 key={ i }
                                 idx={ i }
+                                sizeRatio={sizeRatio}
                                 curPage={ normalizedPage }
                                 maxPage={ maxPage }
                                 activeColor={activeDotColor}
@@ -66,7 +68,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const { containerWidth = 84 } = this.props;
+        const { containerWidth = 84, sizeRatio=1.0 } = this.props;
 
         return (
             <View style={ styles.container }
@@ -90,13 +92,14 @@ class DotContainer extends React.Component<IDotContainerProps>{
                     showsHorizontalScrollIndicator={ false }>
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot />
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} />
 
 
                     { list.map(i => {
                         return (
                             <Dot
+                                sizeRatio={sizeRatio}
                                 key={ i }
                                 idx={ i }
                                 curPage={ normalizedPage }
@@ -107,8 +110,8 @@ class DotContainer extends React.Component<IDotContainerProps>{
                     }) }
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot />
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} />
 
                 </ScrollView>
             </View>
