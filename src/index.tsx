@@ -7,7 +7,7 @@
 import React from 'react';
 import {ScrollView, View, Platform, StyleSheet} from "react-native";
 import Dot from './component/Dot';
-import EmptyDot from './component/EmptyDot';
+import EmptyDot, {defaultEmptyDotSize} from './component/EmptyDot';
 
 export interface IDotContainerProps {
     curPage:number;
@@ -17,6 +17,7 @@ export interface IDotContainerProps {
     activeDotColor:string;
 }
 
+const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
 
 class DotContainer extends React.Component<IDotContainerProps>{
     private refScrollView:ScrollView|null = null;
