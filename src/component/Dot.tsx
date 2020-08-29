@@ -104,7 +104,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
             <Animated.View
                 style={ [ {
                     backgroundColor: activeColor,
-                    margin: 3,
+                    margin: 3 * sizeRatio,
                 }, {
                     width: size,
                     height: size,
