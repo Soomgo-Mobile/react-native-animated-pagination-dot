@@ -4,7 +4,9 @@ react-native-animated-pagination-dot
 Paginate component for React native simple dot with **moving animation** 
 
 -----
-![download](https://img.shields.io/npm/dm/react-native-animated-pagination-dot.svg) ![npm version](https://badge.fury.io/js/react-native-animated-pagination-dot.svg)
+![download](https://img.shields.io/npm/dm/react-native-animated-pagination-dot?logo=npm&style=flat-square)
+![npm version](https://img.shields.io/npm/v/react-native-animated-pagination-dot?style=flat-square)
+![stars](https://img.shields.io/github/stars/rouge3351/react-native-animated-pagination-dot?logo=github&style=flat-square)
 -----
 
 ## Installation
