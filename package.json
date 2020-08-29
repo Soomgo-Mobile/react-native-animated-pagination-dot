@@ -1,14 +1,11 @@
 {
   "name": "react-native-animated-pagination-dot",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "simple pagination dot",
   "main": "src/index.tsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rouge3351/react-native-animated-pagination-dot.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "pagination",
