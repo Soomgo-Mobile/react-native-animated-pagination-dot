@@ -134,7 +134,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
         });
     }
 
-    getSizeRatio = () => {
+    getSizeRatio () {
         if(!this.props.sizeRatio)
             return 1.0;
 
