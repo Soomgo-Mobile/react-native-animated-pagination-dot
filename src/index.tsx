@@ -12,7 +12,6 @@ import EmptyDot, {defaultEmptyDotSize} from './component/EmptyDot';
 export interface IDotContainerProps {
     curPage:number;
     maxPage:number;
-    containerWidth?:number;
     sizeRatio?:number;
     activeDotColor:string;
 }
@@ -70,7 +69,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const { containerWidth = 84 } = this.props;
+        const containerWidth = 84;
 
         return (
             <View style={ styles.container }
