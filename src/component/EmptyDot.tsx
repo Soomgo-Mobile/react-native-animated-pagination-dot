@@ -4,16 +4,21 @@
  */
 import React from 'react';
 import {View} from 'react-native';
+import {IPropEmptyDot} from "./types/Dot";
 
-const EmptyDot = ()=>{
+export const defaultEmptyDotSize = 3;
+
+
+const EmptyDot = (props:IPropEmptyDot):React.FunctionComponentElement<IPropEmptyDot>=>{
+
     return (
         <View
             style={ {
                 backgroundColor: 'white',
                 opacity: 0.0,
-                width: 3,
-                height: 3,
-                margin: 3,
+                width: defaultEmptyDotSize * props.sizeRatio,
+                height: defaultEmptyDotSize * props.sizeRatio,
+                margin: defaultEmptyDotSize * props.sizeRatio,
             } } />
     )
 };

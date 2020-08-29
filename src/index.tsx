@@ -7,15 +7,16 @@
 import React from 'react';
 import {ScrollView, View, Platform, StyleSheet} from "react-native";
 import Dot from './component/Dot';
-import EmptyDot from './component/EmptyDot';
+import EmptyDot, {defaultEmptyDotSize} from './component/EmptyDot';
 
 export interface IDotContainerProps {
     curPage:number;
     maxPage:number;
-    containerWidth?:number;
+    sizeRatio?:number;
     activeDotColor:string;
 }
 
+const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
 
 class DotContainer extends React.Component<IDotContainerProps>{
     private refScrollView:ScrollView|null = null;
@@ -47,6 +48,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
         if(curPage > maxPage-1){
             normalizedPage = maxPage-1
         }
+        const sizeRatio = this.getSizeRatio();
 
         if (maxPage < 5) {
             return (
@@ -56,6 +58,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
                             <Dot
                                 key={ i }
                                 idx={ i }
+                                sizeRatio={sizeRatio}
                                 curPage={ normalizedPage }
                                 maxPage={ maxPage }
                                 activeColor={activeDotColor}
@@ -66,7 +69,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const { containerWidth = 84 } = this.props;
+        const containerWidth = 84;
 
         return (
             <View style={ styles.container }
@@ -79,7 +82,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
                         this.refScrollView = ref;
                     }}
                     style={ {
-                        maxWidth: containerWidth,
+                        maxWidth: containerWidth * sizeRatio,
                     } }
                     contentContainerStyle={ {
                         alignItems: 'center',
@@ -90,13 +93,14 @@ class DotContainer extends React.Component<IDotContainerProps>{
                     showsHorizontalScrollIndicator={ false }>
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot />
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} />
 
 
                     { list.map(i => {
                         return (
                             <Dot
+                                sizeRatio={sizeRatio}
                                 key={ i }
                                 idx={ i }
                                 curPage={ normalizedPage }
@@ -107,8 +111,8 @@ class DotContainer extends React.Component<IDotContainerProps>{
                     }) }
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot />
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} />
 
                 </ScrollView>
             </View>
@@ -118,11 +122,23 @@ class DotContainer extends React.Component<IDotContainerProps>{
 
     scrollTo (index, animated = true) {
         if(!this.refScrollView) return;
+        const sizeRatio = this.getSizeRatio();
+
+        const FIRST_EMPTY_DOT_SPACE = ONE_EMPTY_DOT_SIZE * 2;
+
+        const MOVE_DISTANCE = ONE_EMPTY_DOT_SIZE * sizeRatio;
 
         this.refScrollView.scrollTo({
-            x: Math.max(0, 18 + ( index - 4 ) * 9),
+            x: Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE),
             animated,
         });
+    }
+
+    getSizeRatio () {
+        if(!this.props.sizeRatio)
+            return 1.0;
+
+        return Math.max(1.0, this.props.sizeRatio);
     }
 }
 

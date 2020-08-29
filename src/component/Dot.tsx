@@ -65,19 +65,19 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
 
 
     render () {
-        const { idx, curPage } = this.props;
+        const { idx, curPage, sizeRatio } = this.props;
         const { prevType, type } = this.state;
 
         if (curPage < 3) {
             if (idx >= 5)
                 return (
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
                 );
 
         } else if (curPage < 4) {
             if (idx > 5)
                 return (
-                    <EmptyDot />
+                    <EmptyDot sizeRatio={sizeRatio} />
                 );
         }
 
@@ -89,12 +89,12 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
 
         const size = this.state.animVal.interpolate({
             inputRange: [ 0, 1 ],
-            outputRange: [ prevType.size, type.size ]
+            outputRange: [ prevType.size * sizeRatio, type.size * sizeRatio ]
         });
 
         const borderRadius = this.state.animVal.interpolate({
             inputRange: [ 0, 1 ],
-            outputRange: [ prevType.size * 0.5, type.size * 0.5 ]
+            outputRange: [ prevType.size * sizeRatio * 0.5, type.size * sizeRatio * 0.5 ]
         });
 
         const {activeColor} = this.props;
@@ -104,7 +104,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
             <Animated.View
                 style={ [ {
                     backgroundColor: activeColor,
-                    margin: 3,
+                    margin: 3 * sizeRatio,
                 }, {
                     width: size,
                     height: size,

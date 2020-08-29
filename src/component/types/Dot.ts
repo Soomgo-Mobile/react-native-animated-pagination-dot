@@ -6,6 +6,7 @@ export interface IPropsDot {
     curPage: number;
     maxPage: number;
     activeColor: string;
+    sizeRatio: number;
 }
 
 export interface IStateDot {
@@ -13,4 +14,8 @@ export interface IStateDot {
     animate: boolean;
     prevType: IDotStyle;
     type: IDotStyle;
+}
+
+export interface IPropEmptyDot {
+    sizeRatio:number;
 }
