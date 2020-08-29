@@ -49,6 +49,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
         if(curPage > maxPage-1){
             normalizedPage = maxPage-1
         }
+        const sizeRatio = this.getSizeRatio();
 
         if (maxPage < 5) {
             return (
@@ -69,7 +70,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const { containerWidth = 84, sizeRatio=1.0 } = this.props;
+        const { containerWidth = 84 } = this.props;
 
         return (
             <View style={ styles.container }
@@ -82,7 +83,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
                         this.refScrollView = ref;
                     }}
                     style={ {
-                        maxWidth: containerWidth,
+                        maxWidth: containerWidth * sizeRatio,
                     } }
                     contentContainerStyle={ {
                         alignItems: 'center',
@@ -122,8 +123,9 @@ class DotContainer extends React.Component<IDotContainerProps>{
 
     scrollTo (index, animated = true) {
         if(!this.refScrollView) return;
+        const sizeRatio = this.getSizeRatio();
+
         const FIRST_EMPTY_DOT_SPACE = ONE_EMPTY_DOT_SIZE * 2;
-        const { sizeRatio = 1.0 } = this.props;
 
         const MOVE_DISTANCE = ONE_EMPTY_DOT_SIZE * sizeRatio;
 
@@ -131,6 +133,13 @@ class DotContainer extends React.Component<IDotContainerProps>{
             x: Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE),
             animated,
         });
+    }
+
+    getSizeRatio = () => {
+        if(!this.props.sizeRatio)
+            return 1.0;
+
+        return Math.max(1.0, this.props.sizeRatio);
     }
 }
 
