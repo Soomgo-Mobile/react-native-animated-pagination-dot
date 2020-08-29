@@ -40,6 +40,7 @@ class ExampleDotPaginate extends React.Component {
                     activeDotColor={color} 
                     curPage={currentPage} 
                     maxPage={maxPage}
+                    sizeRatio={1.0}
                 />
             
             </View>
@@ -53,19 +54,19 @@ export default ExampleDotPaginate;
 -----
 ## Example
 
-<img src="https://user-images.githubusercontent.com/4319422/64715563-afa1b100-d4fb-11e9-9bc8-abb686b272a0.gif" alt="Pagination Dot Demo" width="400"/>
+<img src="https://user-images.githubusercontent.com/4319422/91634695-32818b80-ea2d-11ea-93ca-006545f9b9a7.gif" alt="Pagination Dot Demo" width="200"/>
 
 -----
 ## API
 
 ### Props
 
-| **Prop**                    | **Type**                         | **Description**                                     |
-| --------------------------- | -------------------------------- | --------------------------------------------------- |
-| `containerWidth`            | `number`                         | Pagination Dot Container Width ( default 84 ).      |
-| `curPage`                   | `number`                         | Pagination curernt Page                             |
-| `maxPage`                   | `number`                         | Total Page in Pagination                            |
-| `activeDotColor`            | `string`                         | Active Dot Color. dot will control by opacity       |
+| **Prop**                    | **Type**                         | **Description**                                       |
+| --------------------------- | -------------------------------- | ---------------------------------------------------   |
+| `curPage`                   | `number`                         | Pagination curernt Page                               |
+| `maxPage`                   | `number`                         | Total Page in Pagination                              |
+| `activeDotColor`            | `string`                         | Active Dot Color. dot will control by opacity         |
+| `sizeRatio`                 | `number`(default. 1.0)           | Customize Dot Size. minimum value is 1.0 (recommend value is 1.0 ~ 2.0) |
 
 
 ## License
