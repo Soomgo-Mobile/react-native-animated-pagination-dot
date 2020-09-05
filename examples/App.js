@@ -57,7 +57,56 @@ const TestDotContainer = ( {color, sizeRatio = 1.0, maxPage=10} )=>{
 
       </View>
   )
-}
+};
+
+const TestDotVerticalContainer = ( {color, sizeRatio = 1.0, maxPage=10} )=>{
+
+  const [page, setPage] = useState(0);
+
+  return (
+      <View style={{flex:1, flexDirection:'row'}}>
+          <View style={{flex:5, flexDirection:'column'}}>
+              <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center'}}>
+                  <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>page</Text>
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: 'grey',}}>{page+1} / {maxPage}</Text>
+              </View>
+              <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center'}}>
+                  <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>sizeRatio</Text>
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: 'grey',}}>{sizeRatio}</Text>
+              </View>
+
+              <View style={{flex:1, justifyContent:'space-between', flexDirection:'row'}}>
+                  <Button
+                      title="Prev"
+                      onPress={()=>{
+                          setPage(page-1);
+                      }}/>
+
+                  <Button
+                      title="Next"
+                      onPress={()=>{
+                          setPage(page+1);
+                      }}/>
+              </View>
+
+          </View>
+
+          <View style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+
+            <PaginationDot
+                activeDotColor={color}
+                curPage={page}
+                maxPage={maxPage}
+                sizeRatio={sizeRatio}
+                vertical={true}
+            />
+
+          </View>
+
+      </View>
+  )
+};
+
 
 const App = () => {
   return (
