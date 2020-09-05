@@ -87,8 +87,9 @@ class DotContainer extends React.Component<IDotContainerProps>{
                         alignItems: 'center',
                     } }
                     bounces={ false }
-                    horizontal={ true }
+                    horizontal={ !this.props.vertical }
                     scrollEnabled={ false }
+                    showsVerticalScrollIndicator={ false }
                     showsHorizontalScrollIndicator={ false }>
 
                     {/* previous empty dummy dot */}
