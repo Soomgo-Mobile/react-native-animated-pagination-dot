@@ -14,6 +14,7 @@ export interface IDotContainerProps {
     maxPage:number;
     sizeRatio?:number;
     activeDotColor:string;
+    vertical?:boolean;
 }
 
 const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
