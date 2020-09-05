@@ -21,7 +21,7 @@ const TestDotContainer = ( {color, sizeRatio = 1.0, maxPage=10} )=>{
   const [page, setPage] = useState(0);
 
   return (
-      <View style={{flex:1,}}>
+      <View style={{flex:1, borderBottomWidth:0.5, borderBottomColor:'grey', marginBottom:10}}>
           <View style={{flex:1, flexDirection:'row'}}>
               <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center', marginRight:12}}>
                   <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>page</Text>
@@ -64,7 +64,7 @@ const TestDotVerticalContainer = ( {color, sizeRatio = 1.0, maxPage=10} )=>{
   const [page, setPage] = useState(0);
 
   return (
-      <View style={{flex:1, flexDirection:'row'}}>
+      <View style={{flex:1, flexDirection:'row', borderBottomWidth:0.5, borderBottomColor:'grey', marginBottom:10}}>
           <View style={{flex:5, flexDirection:'column'}}>
               <View style={{flex:1, justifyContent:'space-between', flexDirection:'row', alignItems:'center'}}>
                   <Text style={{ fontSize: 16, fontWeight: '400', color: 'black',}}>page</Text>
@@ -121,7 +121,6 @@ const App = () => {
           </View>
             <View style={{flex:4, flexDirection:'column', paddingVertical:30, paddingHorizontal:20, marginBottom:20 }}>
               <TestDotContainer maxPage={20} color={'black'} sizeRatio={1} />
-              <TestDotContainer maxPage={10} color={'red'} sizeRatio={1} />
               <TestDotContainer maxPage={4}  color={'green'} sizeRatio={1.0}/>
               <TestDotVerticalContainer maxPage={10}  color={'rgb(0,0,120)'} />
               <TestDotVerticalContainer maxPage={4}  color={'blue'} sizeRatio={1.5}/>
