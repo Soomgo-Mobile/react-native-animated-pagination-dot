@@ -119,10 +119,12 @@ const App = () => {
                 fontWeight: '600',
                 color: 'black',}}>Animated Pagination Dots</Text>
           </View>
-            <View style={{flex:2, flexDirection:'column', paddingVertical:30, paddingHorizontal:20, marginBottom:20 }}>
+            <View style={{flex:4, flexDirection:'column', paddingVertical:30, paddingHorizontal:20, marginBottom:20 }}>
               <TestDotContainer maxPage={20} color={'black'} sizeRatio={1} />
-              <TestDotContainer maxPage={10} color={'red'} sizeRatio={1.5} />
-              <TestDotContainer maxPage={4}  color={'green'} sizeRatio={1.0} />
+              <TestDotContainer maxPage={10} color={'red'} sizeRatio={1} />
+              <TestDotContainer maxPage={4}  color={'green'} sizeRatio={1.0}/>
+              <TestDotVerticalContainer maxPage={10}  color={'rgb(0,0,120)'} />
+              <TestDotVerticalContainer maxPage={4}  color={'blue'} sizeRatio={1.5}/>
             </View>
         </View>
     </View>
