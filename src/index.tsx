@@ -5,7 +5,7 @@
  *
  */
 import React from 'react';
-import {ScrollView, View, Platform, StyleSheet} from "react-native";
+import {ScrollView, View, ViewStyle, StyleProp} from "react-native";
 import Dot from './component/Dot';
 import EmptyDot, {defaultEmptyDotSize} from './component/EmptyDot';
 
