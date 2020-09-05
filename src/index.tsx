@@ -51,9 +51,11 @@ class DotContainer extends React.Component<IDotContainerProps>{
         }
         const sizeRatio = this.getSizeRatio();
 
+        const container = this.getContainerStyle();
+
         if (maxPage < 5) {
             return (
-                <View style={ styles.container }>
+                <View style={ container }>
                     { list.map(i => {
                         return (
                             <Dot
@@ -70,21 +72,17 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const containerWidth = 84;
 
         return (
-            <View style={ styles.container }
-                onLayout={()=>{
-                    // scroll to right index on initial render
-                    this.scrollTo(this.props.curPage, false);
-                }}>
+            <View style={ container }
+                  onLayout={()=>{
+                      // scroll to right index on initial render
+                      this.scrollTo(this.props.curPage, false);
+                  }}>
                 <ScrollView
                     ref={(ref)=>{
                         this.refScrollView = ref;
                     }}
-                    style={ {
-                        maxWidth: containerWidth * sizeRatio,
-                    } }
                     contentContainerStyle={ {
                         alignItems: 'center',
                     } }
