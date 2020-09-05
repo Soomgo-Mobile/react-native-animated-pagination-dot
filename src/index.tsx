@@ -135,19 +135,26 @@ class DotContainer extends React.Component<IDotContainerProps>{
         });
     }
 
-    getSizeRatio () {
+    getSizeRatio ():number {
         if(!this.props.sizeRatio)
             return 1.0;
 
         return Math.max(1.0, this.props.sizeRatio);
     }
-}
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    getContainerStyle (): StyleProp<ViewStyle> {
+        const {vertical} = this.props;
+        const sizeRatio = this.getSizeRatio();
+        const containerSize = 84 * sizeRatio;
+
+        return {
+            alignItems : 'center',
+            flexDirection : vertical ? 'column' : 'row',
+            maxHeight : vertical ? containerSize : undefined,
+            maxWidth : vertical ? undefined : containerSize
+        }
+
     }
-});
+}
 
 export default DotContainer;
