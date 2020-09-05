@@ -122,14 +122,25 @@ class DotContainer extends React.Component<IDotContainerProps>{
 
     scrollTo (index, animated = true) {
         if(!this.refScrollView) return;
+
         const sizeRatio = this.getSizeRatio();
-
         const FIRST_EMPTY_DOT_SPACE = ONE_EMPTY_DOT_SIZE * 2;
-
         const MOVE_DISTANCE = ONE_EMPTY_DOT_SIZE * sizeRatio;
 
+        const moveTo = Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE);
+
+        if ( this.props.vertical ){
+            this.refScrollView.scrollTo({
+                x: 0,
+                y: moveTo,
+                animated,
+            });
+            return;
+        }
+
         this.refScrollView.scrollTo({
-            x: Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE),
+            x: moveTo,
+            y:0,
             animated,
         });
     }
