@@ -4,9 +4,9 @@ react-native-animated-pagination-dot
 Paginate component for React native simple dot with **moving animation** 
 
 -----
-![download](https://img.shields.io/npm/dm/react-native-animated-pagination-dot?logo=npm&style=flat-square)
-![npm version](https://img.shields.io/npm/v/react-native-animated-pagination-dot?style=flat-square)
-![stars](https://img.shields.io/github/stars/rouge3351/react-native-animated-pagination-dot?logo=github&style=flat-square)
+[![download](https://img.shields.io/npm/dm/react-native-animated-pagination-dot?logo=npm&style=flat-square)](https://www.npmjs.com/package/react-native-animated-pagination-dot)
+[![npm version](https://img.shields.io/npm/v/react-native-animated-pagination-dot?style=flat-square)](https://www.npmjs.com/package/react-native-animated-pagination-dot)
+[![stars](https://img.shields.io/github/stars/rouge3351/react-native-animated-pagination-dot?logo=github&style=flat-square)](https://github.com/rouge3351/react-native-animated-pagination-dot)
 -----
 
 ## Installation
@@ -56,19 +56,21 @@ export default ExampleDotPaginate;
 -----
 ## Example
 
-<img src="https://user-images.githubusercontent.com/4319422/91634767-df5c0880-ea2d-11ea-90f6-ae7bb4030325.gif" alt="Pagination Dot Demo" width="250"/>
+<img src="https://user-images.githubusercontent.com/4319422/92298858-39a61d80-ef88-11ea-85dd-e7a4a5c115dc.gif" alt="Pagination Dot Demo" width="320"/>
 
 -----
 ## API
 
 ### Props
 
-| **Prop**                    | **Type**                         | **Description**                                       |
-| --------------------------- | -------------------------------- | ---------------------------------------------------   |
-| `curPage`                   | `number`                         | Pagination curernt Page                               |
-| `maxPage`                   | `number`                         | Total Page in Pagination                              |
-| `activeDotColor`            | `string`                         | Active Dot Color. dot will control by opacity         |
-| `sizeRatio`                 | `number`(default. 1.0)           | Customize Dot Size. minimum value is 1.0 (recommend value is 1.0 ~ 2.0) |
+| **Prop**                    | **Type**                    | **Required(Default Value)**  | **Description**                                                |
+| --------------------------- | ----------------------------| ---------------------------- | ---------------------------------------------------            |
+| `curPage`                   | `number`                    | required                     | Pagination curernt Page                                        |
+| `maxPage`                   | `number`                    | required                     | Total Page in Pagination                                       |
+| `activeDotColor`            | `string`                    | required                     | Active Dot Color. dot will control by opacity                  |
+| `sizeRatio`                 | `number`                    | 0.1                          | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
+| `vertical`                  | `boolean`                   | false                        | Dot direction                                         |
+
 
 
 ## License

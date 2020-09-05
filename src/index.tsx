@@ -5,7 +5,7 @@
  *
  */
 import React from 'react';
-import {ScrollView, View, Platform, StyleSheet} from "react-native";
+import {ScrollView, View, ViewStyle, StyleProp} from "react-native";
 import Dot from './component/Dot';
 import EmptyDot, {defaultEmptyDotSize} from './component/EmptyDot';
 
@@ -14,6 +14,7 @@ export interface IDotContainerProps {
     maxPage:number;
     sizeRatio?:number;
     activeDotColor:string;
+    vertical?:boolean;
 }
 
 const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
@@ -50,9 +51,11 @@ class DotContainer extends React.Component<IDotContainerProps>{
         }
         const sizeRatio = this.getSizeRatio();
 
+        const container = this.getContainerStyle();
+
         if (maxPage < 5) {
             return (
-                <View style={ styles.container }>
+                <View style={ container }>
                     { list.map(i => {
                         return (
                             <Dot
@@ -69,27 +72,24 @@ class DotContainer extends React.Component<IDotContainerProps>{
             )
         }
 
-        const containerWidth = 84;
 
         return (
-            <View style={ styles.container }
-                onLayout={()=>{
-                    // scroll to right index on initial render
-                    this.scrollTo(this.props.curPage, false);
-                }}>
+            <View style={ container }
+                  onLayout={()=>{
+                      // scroll to right index on initial render
+                      this.scrollTo(this.props.curPage, false);
+                  }}>
                 <ScrollView
                     ref={(ref)=>{
                         this.refScrollView = ref;
                     }}
-                    style={ {
-                        maxWidth: containerWidth * sizeRatio,
-                    } }
                     contentContainerStyle={ {
                         alignItems: 'center',
                     } }
                     bounces={ false }
-                    horizontal={ true }
+                    horizontal={ !this.props.vertical }
                     scrollEnabled={ false }
+                    showsVerticalScrollIndicator={ false }
                     showsHorizontalScrollIndicator={ false }>
 
                     {/* previous empty dummy dot */}
@@ -122,31 +122,49 @@ class DotContainer extends React.Component<IDotContainerProps>{
 
     scrollTo (index, animated = true) {
         if(!this.refScrollView) return;
+
         const sizeRatio = this.getSizeRatio();
-
         const FIRST_EMPTY_DOT_SPACE = ONE_EMPTY_DOT_SIZE * 2;
-
         const MOVE_DISTANCE = ONE_EMPTY_DOT_SIZE * sizeRatio;
 
+        const moveTo = Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE);
+
+        if ( this.props.vertical ){
+            this.refScrollView.scrollTo({
+                x: 0,
+                y: moveTo,
+                animated,
+            });
+            return;
+        }
+
         this.refScrollView.scrollTo({
-            x: Math.max(0, FIRST_EMPTY_DOT_SPACE + ( index - 4 ) * MOVE_DISTANCE),
+            x: moveTo,
+            y:0,
             animated,
         });
     }
 
-    getSizeRatio () {
+    getSizeRatio ():number {
         if(!this.props.sizeRatio)
             return 1.0;
 
         return Math.max(1.0, this.props.sizeRatio);
     }
-}
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    getContainerStyle (): StyleProp<ViewStyle> {
+        const {vertical} = this.props;
+        const sizeRatio = this.getSizeRatio();
+        const containerSize = 84 * sizeRatio;
+
+        return {
+            alignItems : 'center',
+            flexDirection : vertical ? 'column' : 'row',
+            maxHeight : vertical ? containerSize : undefined,
+            maxWidth : vertical ? undefined : containerSize
+        }
+
     }
-});
+}
 
 export default DotContainer;
