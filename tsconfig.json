@@ -16,7 +16,6 @@
     "noEmit": true,
     "module": "esnext",
     "target": "es5",
-    "noImplicitAny": false,
     "sourceMap": true,
     "strict": true,
     "downlevelIteration": true

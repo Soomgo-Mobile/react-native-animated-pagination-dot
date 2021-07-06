@@ -31,5 +31,8 @@
   "peerDependencies": {
     "react": ">= 16.x",
     "react-native": ">=0.40.x"
+  },
+  "dependencies": {
+    "typescript": "^4.3.5"
   }
 }

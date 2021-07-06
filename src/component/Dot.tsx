@@ -15,7 +15,7 @@ import {
 import { getDotStyle } from '../util/DotUtils';
 
 class Dot extends React.Component<IPropsDot, IStateDot> {
-    constructor (props) {
+    constructor (props: IPropsDot) {
         super(props);
 
         const type = getDotStyle({
@@ -33,7 +33,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
 
     }
 
-    static getDerivedStateFromProps (nextProps, prevState) {
+    static getDerivedStateFromProps (nextProps: IPropsDot, prevState: IStateDot) {
         const nextType = getDotStyle({
             idx:nextProps.idx,
             curPage:nextProps.curPage,
@@ -65,7 +65,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
 
 
     render () {
-        const { idx, curPage, sizeRatio } = this.props;
+        const { idx, curPage, sizeRatio, activeStyle} = this.props;
         const { prevType, type } = this.state;
 
         if (curPage < 3) {
@@ -97,7 +97,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
             outputRange: [ prevType.size * sizeRatio * 0.5, type.size * sizeRatio * 0.5 ]
         });
 
-        const {activeColor} = this.props;
+        const { activeColor } = this.props;
 
 
         return (
@@ -110,7 +110,7 @@ class Dot extends React.Component<IPropsDot, IStateDot> {
                     height: size,
                     borderRadius: borderRadius,
                     opacity: opacity,
-                } ] } />
+                }, activeStyle ] } />
         )
     }
 

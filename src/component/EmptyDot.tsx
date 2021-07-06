@@ -9,17 +9,17 @@ import {IPropEmptyDot} from "./types/Dot";
 export const defaultEmptyDotSize = 3;
 
 
-const EmptyDot = (props:IPropEmptyDot):React.FunctionComponentElement<IPropEmptyDot>=>{
+const EmptyDot = ({ sizeRatio, inActiveStyle }:IPropEmptyDot):React.FunctionComponentElement<IPropEmptyDot>=>{
 
     return (
         <View
-            style={ {
+            style={ [{
                 backgroundColor: 'white',
                 opacity: 0.0,
-                width: defaultEmptyDotSize * props.sizeRatio,
-                height: defaultEmptyDotSize * props.sizeRatio,
-                margin: defaultEmptyDotSize * props.sizeRatio,
-            } } />
+                width: defaultEmptyDotSize * sizeRatio,
+                height: defaultEmptyDotSize * sizeRatio,
+                margin: defaultEmptyDotSize * sizeRatio,
+            }, inActiveStyle] } />
     )
 };
 

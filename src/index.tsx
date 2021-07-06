@@ -22,7 +22,7 @@ const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
 class DotContainer extends React.Component<IDotContainerProps>{
     private refScrollView:ScrollView|null = null;
 
-    shouldComponentUpdate (nextProps) {
+    shouldComponentUpdate (nextProps: IDotContainerProps) {
         if (this.props.curPage === nextProps.curPage) {
             // prevent unnecessary re-render caused by external change
             return false;
@@ -31,7 +31,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
         return true;
     }
 
-    componentDidUpdate (prevProps){
+    componentDidUpdate (prevProps: IDotContainerProps){
         if (this.props.maxPage > 4 && prevProps.curPage !== this.props.curPage)
             this.scrollTo(this.props.curPage)
     }
@@ -120,7 +120,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
     }
 
 
-    scrollTo (index, animated = true) {
+    scrollTo (index: number, animated = true) {
         if(!this.refScrollView) return;
 
         const sizeRatio = this.getSizeRatio();
