@@ -15,6 +15,8 @@ export interface IDotContainerProps {
     sizeRatio?:number;
     activeDotColor:string;
     vertical?:boolean;
+    activeStyle?: ViewStyle
+    inActiveStyle?: ViewStyle
 }
 
 const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
@@ -37,7 +39,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
     }
 
     render () {
-        const { curPage, maxPage, activeDotColor } = this.props;
+        const { curPage, maxPage, activeDotColor, activeStyle, inActiveStyle } = this.props;
         const list = [ ...Array(maxPage).keys() ];
 
 
@@ -65,6 +67,7 @@ class DotContainer extends React.Component<IDotContainerProps>{
                                 curPage={ normalizedPage }
                                 maxPage={ maxPage }
                                 activeColor={activeDotColor}
+                                activeStyle={activeStyle}
                             />
                         );
                     }) }
@@ -93,8 +96,8 @@ class DotContainer extends React.Component<IDotContainerProps>{
                     showsHorizontalScrollIndicator={ false }>
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot sizeRatio={sizeRatio} />
-                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
+                    <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
 
 
                     { list.map(i => {
@@ -106,13 +109,14 @@ class DotContainer extends React.Component<IDotContainerProps>{
                                 curPage={ normalizedPage }
                                 maxPage={ maxPage }
                                 activeColor={activeDotColor}
+                                activeStyle={activeStyle}
                             />
                         );
                     }) }
 
                     {/* previous empty dummy dot */}
-                    <EmptyDot sizeRatio={sizeRatio} />
-                    <EmptyDot sizeRatio={sizeRatio} />
+                    <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
+                    <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
 
                 </ScrollView>
             </View>
