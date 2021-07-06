@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import { Animated, ViewStyle } from 'react-native';
 import { IDotStyle } from '../../util/DotUtils';
 
 export interface IPropsDot {
@@ -7,6 +7,7 @@ export interface IPropsDot {
     maxPage: number;
     activeColor: string;
     sizeRatio: number;
+    activeStyle?: ViewStyle
 }
 
 export interface IStateDot {
@@ -18,4 +19,5 @@ export interface IStateDot {
 
 export interface IPropEmptyDot {
     sizeRatio:number;
+    inActiveStyle?: ViewStyle
 }
