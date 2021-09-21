@@ -59,6 +59,9 @@ export default ExampleDotPaginate;
 | `sizeRatio`                 | `number`                    | 1.0                          | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
 | `vertical`                  | `boolean`                   | false                        | Dot direction                                         |
 
+## Contributing
+
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 
 ## License
