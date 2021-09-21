@@ -32,7 +32,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
 
   const scrollTo = useCallback<(index: number, animated?: boolean) => void>(
     (index, animated = true) => {
-      if (!refScrollView) return;
+      if (!refScrollView.current) return;
 
       const sizeRatio = getSizeRatio();
       const FIRST_EMPTY_DOT_SPACE = ONE_EMPTY_DOT_SIZE * 2;
@@ -44,7 +44,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
       );
 
       if (props.vertical) {
-        refScrollView.current?.scrollTo({
+        refScrollView.current.scrollTo({
           x: 0,
           y: moveTo,
           animated,
@@ -52,7 +52,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
         return;
       }
 
-      refScrollView.current?.scrollTo({
+      refScrollView.current.scrollTo({
         x: moveTo,
         y: 0,
         animated,

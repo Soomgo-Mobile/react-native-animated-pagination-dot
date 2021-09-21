@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Animated } from 'react-native';
 import { usePrevious } from 'react-use';
 import EmptyDot from './EmptyDot';
-import { getDotStyle, IDotStyle } from '../util/DotUtils';
+import { getDotStyle } from '../util/DotUtils';
 
 const Dot: React.FC<{
   idx: number;
@@ -26,7 +26,7 @@ const Dot: React.FC<{
       maxPage: props.maxPage,
     })
   );
-  const prevType = usePrevious<IDotStyle>(type);
+  const prevType = usePrevious(type);
 
   useEffect(() => {
     const nextType = getDotStyle({
