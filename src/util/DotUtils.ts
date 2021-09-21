@@ -1,9 +1,9 @@
-export type IDotStyle = {
+type IDotStyle = {
   size: number;
   opacity: number;
 };
 
-export enum EnumDotType {
+enum EnumDotType {
   ACTIVE,
   INACTIVE,
   MEDIUM,
