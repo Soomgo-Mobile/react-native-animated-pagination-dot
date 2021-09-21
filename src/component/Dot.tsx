@@ -4,7 +4,7 @@
  * Converted to Typescript on 14/07/2020.
  * Converted to Functional component. on 21/09/2021
  */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Animated } from 'react-native';
 import { usePrevious } from 'react-use';
 import EmptyDot from './EmptyDot';
@@ -60,47 +60,52 @@ const Dot: React.FC<{
     }).start();
   }, [animVal, animate, prevType, type]);
 
+  const animStyle = useMemo(() => {
+    const size = animVal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [
+        (prevType?.size || 3) * props.sizeRatio,
+        type.size * props.sizeRatio,
+      ],
+    });
+    return {
+      width: size,
+      height: size,
+      borderRadius: animVal.interpolate({
+        inputRange: [0, 1],
+        outputRange: [
+          (prevType?.size || 3) * props.sizeRatio * 0.5,
+          type.size * props.sizeRatio * 0.5,
+        ],
+      }),
+      opacity: animVal.interpolate({
+        inputRange: [0, 1],
+        outputRange: [prevType?.opacity || 0.2, type.opacity],
+      }),
+    };
+  }, [
+    animVal,
+    prevType?.opacity,
+    prevType?.size,
+    props.sizeRatio,
+    type.opacity,
+    type.size,
+  ]);
+
   if (props.curPage < 3) {
     if (props.idx >= 5) return <EmptyDot sizeRatio={props.sizeRatio} />;
   } else if (props.curPage < 4) {
     if (props.idx > 5) return <EmptyDot sizeRatio={props.sizeRatio} />;
   }
 
-  const opacity = animVal.interpolate({
-    inputRange: [0, 1],
-    outputRange: [prevType?.opacity || 0.2, type.opacity],
-  });
-
-  const size = animVal.interpolate({
-    inputRange: [0, 1],
-    outputRange: [
-      (prevType?.size || 3) * props.sizeRatio,
-      type.size * props.sizeRatio,
-    ],
-  });
-
-  const borderRadius = animVal.interpolate({
-    inputRange: [0, 1],
-    outputRange: [
-      (prevType?.size || 3) * props.sizeRatio * 0.5,
-      type.size * props.sizeRatio * 0.5,
-    ],
-  });
-  const { activeColor } = props;
-
   return (
     <Animated.View
       style={[
         {
-          backgroundColor: activeColor,
+          backgroundColor: props.activeColor,
           margin: 3 * props.sizeRatio,
         },
-        {
-          width: size,
-          height: size,
-          borderRadius: borderRadius,
-          opacity: opacity,
-        },
+        animStyle,
       ]}
     />
   );
