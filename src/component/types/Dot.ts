@@ -15,7 +15,3 @@ export interface IStateDot {
   prevType: IDotStyle;
   type: IDotStyle;
 }
-
-export interface IPropEmptyDot {
-  sizeRatio: number;
-}
