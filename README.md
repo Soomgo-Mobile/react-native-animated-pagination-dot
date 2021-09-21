@@ -26,28 +26,16 @@ import React from 'react'
 import {View} from 'react-native'
 import PaginationDot from 'react-native-animated-pagination-dot'
 
-class ExampleDotPaginate extends React.Component {
-    state={
-        currentPage :0,
-        maxPage:20,
-    };
+const ExampleDotPaginate:React.FC = ()=>{
+    const [curPage] = React.useState(0);
     
-    render(){
-        const {currentPage, maxPage} = this.state;
-        const color = 'black';
-        
-        return (
-            <View style={{flex:1,}}>
-                <PaginationDot 
-                    activeDotColor={color} 
-                    curPage={currentPage} 
-                    maxPage={maxPage}
-                    sizeRatio={1.0}
-                />
-            
-            </View>
-        )
-    }
+    return (
+        <PaginationDot
+            activeDotColor={'black'}
+            curPage={curPage}
+            maxPage={20}
+        />
+    )
 }
 
 export default ExampleDotPaginate;
