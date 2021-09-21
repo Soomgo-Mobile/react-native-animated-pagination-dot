@@ -2,118 +2,113 @@
  *
  * Created by rouge on 11/09/2019.
  * Converted to Typescript on 14/07/2020.
- *
+ * Converted to Functional component. on 21/09/2021
  */
-import React from "react";
-import {Animated} from "react-native";
-
+import React, { useEffect, useMemo, useState } from 'react';
+import { Animated } from 'react-native';
+import { usePrevious } from 'react-use';
 import EmptyDot from './EmptyDot';
-import {
-    IPropsDot,
-    IStateDot,
-} from './types/Dot';
 import { getDotStyle } from '../util/DotUtils';
 
-class Dot extends React.Component<IPropsDot, IStateDot> {
-    constructor (props) {
-        super(props);
+const Dot: React.FC<{
+  idx: number;
+  curPage: number;
+  maxPage: number;
+  activeColor: string;
+  sizeRatio: number;
+}> = (props) => {
+  const [animVal] = useState(new Animated.Value(0));
+  const [animate, setAnimate] = useState(false);
+  const [type, setType] = useState(() =>
+    getDotStyle({
+      idx: props.idx,
+      curPage: props.curPage,
+      maxPage: props.maxPage,
+    })
+  );
+  const prevType = usePrevious(type);
 
-        const type = getDotStyle({
-            idx:props.idx,
-            curPage:props.curPage,
-            maxPage:props.maxPage,
-        });
+  useEffect(() => {
+    const nextType = getDotStyle({
+      idx: props.idx,
+      curPage: props.curPage,
+      maxPage: props.maxPage,
+    });
 
-        this.state = {
-            animVal: new Animated.Value(0),
-            animate: false,
-            prevType: type,
-            type: type
-        }
+    const nextAnimate =
+      nextType.size !== (prevType?.size || 3) ||
+      nextType.opacity !== (prevType?.opacity || 0.2);
 
-    }
+    setType(nextType);
+    setAnimate(nextAnimate);
+  }, [
+    prevType?.opacity,
+    prevType?.size,
+    props.curPage,
+    props.idx,
+    props.maxPage,
+  ]);
 
-    static getDerivedStateFromProps (nextProps, prevState) {
-        const nextType = getDotStyle({
-            idx:nextProps.idx,
-            curPage:nextProps.curPage,
-            maxPage:nextProps.maxPage,
-        });
-        const prevType = prevState.type;
+  useEffect(() => {
+    if (!animate) return;
 
-        return {
-            animate: ( nextType.size !== prevType.size ) || ( nextType.opacity !== prevType.opacity ),
-            prevType: prevType,
-            type: nextType
-        }
-    }
+    animVal.setValue(0);
+    Animated.timing(animVal, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [animVal, animate, prevType, type]);
 
-    componentDidUpdate () {
+  const animStyle = useMemo(() => {
+    const size = animVal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [
+        (prevType?.size || 3) * props.sizeRatio,
+        type.size * props.sizeRatio,
+      ],
+    });
+    return {
+      width: size,
+      height: size,
+      borderRadius: animVal.interpolate({
+        inputRange: [0, 1],
+        outputRange: [
+          (prevType?.size || 3) * props.sizeRatio * 0.5,
+          type.size * props.sizeRatio * 0.5,
+        ],
+      }),
+      opacity: animVal.interpolate({
+        inputRange: [0, 1],
+        outputRange: [prevType?.opacity || 0.2, type.opacity],
+      }),
+    };
+  }, [
+    animVal,
+    prevType?.opacity,
+    prevType?.size,
+    props.sizeRatio,
+    type.opacity,
+    type.size,
+  ]);
 
-        if (!this.state.animate) return;
+  if (props.curPage < 3) {
+    if (props.idx >= 5) return <EmptyDot sizeRatio={props.sizeRatio} />;
+  } else if (props.curPage < 4) {
+    if (props.idx > 5) return <EmptyDot sizeRatio={props.sizeRatio} />;
+  }
 
-        this.state.animVal.setValue(0);
-
-        Animated.timing(
-            this.state.animVal, {
-                toValue: 1,
-                duration: 300,
-                useNativeDriver:false
-            },
-        ).start();
-    }
-
-
-    render () {
-        const { idx, curPage, sizeRatio } = this.props;
-        const { prevType, type } = this.state;
-
-        if (curPage < 3) {
-            if (idx >= 5)
-                return (
-                    <EmptyDot sizeRatio={sizeRatio} />
-                );
-
-        } else if (curPage < 4) {
-            if (idx > 5)
-                return (
-                    <EmptyDot sizeRatio={sizeRatio} />
-                );
-        }
-
-
-        const opacity = this.state.animVal.interpolate({
-            inputRange: [ 0, 1 ],
-            outputRange: [ prevType.opacity, type.opacity ]
-        });
-
-        const size = this.state.animVal.interpolate({
-            inputRange: [ 0, 1 ],
-            outputRange: [ prevType.size * sizeRatio, type.size * sizeRatio ]
-        });
-
-        const borderRadius = this.state.animVal.interpolate({
-            inputRange: [ 0, 1 ],
-            outputRange: [ prevType.size * sizeRatio * 0.5, type.size * sizeRatio * 0.5 ]
-        });
-
-        const {activeColor} = this.props;
-
-
-        return (
-            <Animated.View
-                style={ [ {
-                    backgroundColor: activeColor,
-                    margin: 3 * sizeRatio,
-                }, {
-                    width: size,
-                    height: size,
-                    borderRadius: borderRadius,
-                    opacity: opacity,
-                } ] } />
-        )
-    }
-
-}
+  return (
+    <Animated.View
+      style={[
+        {
+          backgroundColor: props.activeColor,
+          margin: 3 * props.sizeRatio,
+        },
+        animStyle,
+      ]}
+    />
+  );
+};
 
 export default Dot;
