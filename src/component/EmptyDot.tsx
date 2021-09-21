@@ -1,6 +1,6 @@
 /**
- *
  * Created by rouge on 11/09/2019.
+ * Converted to Functional component. on 21/09/2021
  */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
