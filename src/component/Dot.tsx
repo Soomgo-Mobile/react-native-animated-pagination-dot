@@ -6,7 +6,7 @@
  */
 import React, { useEffect, useMemo, useState } from 'react';
 import { Animated } from 'react-native';
-import { usePrevious } from 'react-use';
+import usePrevious from 'react-use/lib/usePrevious';
 import EmptyDot from './EmptyDot';
 import { getDotStyle } from '../util/DotUtils';
 

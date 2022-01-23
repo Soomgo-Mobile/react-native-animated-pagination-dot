@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { ScrollView, View, ViewStyle, StyleProp } from 'react-native';
 import Dot from './component/Dot';
 import EmptyDot, { defaultEmptyDotSize } from './component/EmptyDot';
-import { usePrevious } from 'react-use';
+import usePrevious from 'react-use/lib/usePrevious';
 
 export interface IDotContainerProps {
   curPage: number;
