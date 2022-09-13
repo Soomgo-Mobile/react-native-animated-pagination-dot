@@ -5,7 +5,13 @@
  * Converted to Functional component. on 21/09/2021
  */
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { ScrollView, View, ViewStyle, StyleProp } from 'react-native';
+import {
+  ScrollView,
+  View,
+  ViewStyle,
+  StyleProp,
+  StyleSheet,
+} from 'react-native';
 import Dot from './component/Dot';
 import EmptyDot, { defaultEmptyDotSize } from './component/EmptyDot';
 import usePrevious from 'react-use/lib/usePrevious';
@@ -15,6 +21,7 @@ export interface IDotContainerProps {
   maxPage: number;
   sizeRatio?: number;
   activeDotColor: string;
+  inactiveDotColor?: string;
   vertical?: boolean;
 }
 
@@ -79,7 +86,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
       scrollTo(props.curPage);
   }, [prevPage, props.curPage, props.maxPage, scrollTo]);
 
-  const { curPage, maxPage, activeDotColor } = props;
+  const { curPage, maxPage, activeDotColor, inactiveDotColor } = props;
   const list = useMemo(() => [...Array(maxPage).keys()], [maxPage]);
 
   let normalizedPage = curPage;
@@ -106,6 +113,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
               curPage={normalizedPage}
               maxPage={maxPage}
               activeColor={activeDotColor}
+              inactiveColor={inactiveDotColor}
             />
           );
         })}
@@ -123,9 +131,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
     >
       <ScrollView
         ref={refScrollView}
-        contentContainerStyle={{
-          alignItems: 'center',
-        }}
+        contentContainerStyle={styles.scrollViewContainer}
         bounces={false}
         horizontal={!props.vertical}
         scrollEnabled={false}
@@ -145,6 +151,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
               curPage={normalizedPage}
               maxPage={maxPage}
               activeColor={activeDotColor}
+              inactiveColor={inactiveDotColor}
             />
           );
         })}
@@ -156,5 +163,11 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollViewContainer: {
+    alignItems: 'center',
+  },
+});
 
 export default DotContainer;
