@@ -44,7 +44,7 @@ export default ExampleDotPaginate;
 -----
 ## Example
 
-<img src="https://user-images.githubusercontent.com/4319422/92298858-39a61d80-ef88-11ea-85dd-e7a4a5c115dc.gif" alt="Pagination Dot Demo" width="320"/>
+<img src="https://user-images.githubusercontent.com/4319422/189922878-7172d48c-8307-47ac-806a-6255f7bd6d3b.gif" alt="Pagination Dot Demo" width="320"/>
 
 -----
 ## API
