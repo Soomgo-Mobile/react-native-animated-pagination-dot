@@ -51,13 +51,14 @@ export default ExampleDotPaginate;
 
 ### Props
 
-| **Prop**                    | **Type**                    | **Required(Default Value)**  | **Description**                                                |
-| --------------------------- | ----------------------------| ---------------------------- | ---------------------------------------------------            |
-| `curPage`                   | `number`                    | required                     | Pagination curernt Page                                        |
-| `maxPage`                   | `number`                    | required                     | Total Page in Pagination                                       |
-| `activeDotColor`            | `string`                    | required                     | Active Dot Color. dot will control by opacity                  |
-| `sizeRatio`                 | `number`                    | 1.0                          | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
-| `vertical`                  | `boolean`                   | false                        | Dot direction                                         |
+| **Prop**           | **Type**                    | **Required(Default Value)** | **Description**                                                |
+|--------------------| ----------------------------|----------------------------|----------------------------------------------------------------|
+| `curPage`          | `number`                    | required                   | Pagination curernt Page                                        |
+| `maxPage`          | `number`                    | required                   | Total Page in Pagination                                       |
+| `activeDotColor`   | `string`                    | required                   | Active Dot Color. dot will control by opacity                  |
+| `inactiveDotColor` | `string`                    | undefined                  | InActive Dot Color. dot will control by opacity                |
+| `sizeRatio`        | `number`                    | 1.0                        | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
+| `vertical`         | `boolean`                   | false                      | Dot direction                                                  |
 
 ## Contributing
 
