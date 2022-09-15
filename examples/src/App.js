@@ -10,7 +10,12 @@ import { View, Text, StatusBar, Button } from 'react-native';
 
 import PaginationDot from 'react-native-animated-pagination-dot';
 
-const TestDotContainer = ({ color, sizeRatio = 1.0, maxPage = 10 }) => {
+const TestDotContainer = ({
+  color,
+  sizeRatio = 1.0,
+  maxPage = 10,
+  inactiveColor,
+}) => {
   const [page, setPage] = useState(0);
 
   return (
@@ -75,6 +80,7 @@ const TestDotContainer = ({ color, sizeRatio = 1.0, maxPage = 10 }) => {
         <PaginationDot
           activeDotColor={color}
           curPage={page}
+          inactiveDotColor={inactiveColor ?? undefined}
           maxPage={maxPage}
           sizeRatio={sizeRatio}
         />
@@ -212,6 +218,12 @@ const App = () => {
         >
           <TestDotContainer maxPage={20} color={'black'} sizeRatio={1} />
           <TestDotContainer maxPage={4} color={'green'} sizeRatio={1.0} />
+          <TestDotContainer
+            maxPage={10}
+            color={'blue'}
+            inactiveColor={'red'}
+            sizeRatio={1.0}
+          />
           <TestDotVerticalContainer maxPage={10} color={'rgb(0,0,120)'} />
           <TestDotVerticalContainer
             maxPage={4}
