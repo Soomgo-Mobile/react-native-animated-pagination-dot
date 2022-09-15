@@ -15,6 +15,7 @@ const Dot: React.FC<{
   curPage: number;
   maxPage: number;
   activeColor: string;
+  inactiveColor?: string;
   sizeRatio: number;
 }> = (props) => {
   const [animVal] = useState(new Animated.Value(0));
@@ -26,7 +27,18 @@ const Dot: React.FC<{
       maxPage: props.maxPage,
     })
   );
+
+  const [dotColor, setDotColor] = useState<string>(() => {
+    if (props.curPage === props.idx) {
+      //its current active page now
+      return props.activeColor;
+    }
+
+    return props.inactiveColor ?? props.activeColor;
+  });
+
   const prevType = usePrevious(type);
+  const prevDotColor = usePrevious<string>(dotColor);
 
   useEffect(() => {
     const nextType = getDotStyle({
@@ -38,14 +50,21 @@ const Dot: React.FC<{
     const nextAnimate =
       nextType.size !== (prevType?.size || 3) ||
       nextType.opacity !== (prevType?.opacity || 0.2);
+    if (props.curPage === props.idx) {
+      setDotColor(props.activeColor);
+    } else {
+      setDotColor(props.inactiveColor ?? props.activeColor);
+    }
 
     setType(nextType);
     setAnimate(nextAnimate);
   }, [
     prevType?.opacity,
     prevType?.size,
+    props.activeColor,
     props.curPage,
     props.idx,
+    props.inactiveColor,
     props.maxPage,
   ]);
 
@@ -68,9 +87,16 @@ const Dot: React.FC<{
         type.size * props.sizeRatio,
       ],
     });
+
+    const backgroundColor = animVal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [prevDotColor ?? props.activeColor, dotColor],
+    });
+
     return {
       width: size,
       height: size,
+      backgroundColor,
       borderRadius: animVal.interpolate({
         inputRange: [0, 1],
         outputRange: [
@@ -85,8 +111,11 @@ const Dot: React.FC<{
     };
   }, [
     animVal,
+    dotColor,
+    prevDotColor,
     prevType?.opacity,
     prevType?.size,
+    props.activeColor,
     props.sizeRatio,
     type.opacity,
     type.size,
@@ -102,7 +131,6 @@ const Dot: React.FC<{
     <Animated.View
       style={[
         {
-          backgroundColor: props.activeColor,
           margin: 3 * props.sizeRatio,
         },
         animStyle,
