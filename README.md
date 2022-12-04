@@ -58,6 +58,7 @@ export default ExampleDotPaginate;
 | `activeDotColor`   | `string`                    | required                   | Active Dot Color. dot will control by opacity                  |
 | `inactiveDotColor` | `string`                    | undefined                  | InActive Dot Color. dot will control by opacity                |
 | `sizeRatio`        | `number`                    | 1.0                        | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
+| `opacity`          | `number`                    | 0.2                        | Dot opacity for inactive dot                                   |
 | `vertical`         | `boolean`                   | false                      | Dot direction                                                  |
 
 ## Contributing

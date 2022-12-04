@@ -17,6 +17,7 @@ const Dot: React.FC<{
   activeColor: string;
   inactiveColor?: string;
   sizeRatio: number;
+  opacity?: number;
 }> = (props) => {
   const [animVal] = useState(new Animated.Value(0));
   const [animate, setAnimate] = useState(false);
@@ -37,8 +38,18 @@ const Dot: React.FC<{
     return props.inactiveColor ?? props.activeColor;
   });
 
+  const [dotOpacity, setDotOpacity] = useState<number>(() => {
+    if (props.curPage === props.idx) {
+      //its current active page now
+      return 1;
+    }
+
+    return props.opacity ?? 0.2;
+  });
+
   const prevType = usePrevious(type);
   const prevDotColor = usePrevious<string>(dotColor);
+  const prevOpacity = usePrevious<number>(dotOpacity);
 
   useEffect(() => {
     const nextType = getDotStyle({
@@ -47,18 +58,20 @@ const Dot: React.FC<{
       maxPage: props.maxPage,
     });
 
-    const nextAnimate =
-      nextType.size !== (prevType?.size || 3) ||
-      nextType.opacity !== (prevType?.opacity || 0.2);
+    const nextAnimate = nextType.size !== (prevType?.size || 3);
     if (props.curPage === props.idx) {
       setDotColor(props.activeColor);
+      setDotOpacity(1);
     } else {
       setDotColor(props.inactiveColor ?? props.activeColor);
+      setDotOpacity(props.opacity ?? 0.2);
     }
 
     setType(nextType);
     setAnimate(nextAnimate);
   }, [
+    dotOpacity,
+    prevType,
     prevType?.opacity,
     prevType?.size,
     props.activeColor,
@@ -66,6 +79,7 @@ const Dot: React.FC<{
     props.idx,
     props.inactiveColor,
     props.maxPage,
+    props.opacity,
   ]);
 
   useEffect(() => {
@@ -93,6 +107,11 @@ const Dot: React.FC<{
       outputRange: [prevDotColor ?? props.activeColor, dotColor],
     });
 
+    const opacity = animVal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [prevOpacity ?? props.opacity, dotOpacity],
+    });
+
     return {
       width: size,
       height: size,
@@ -104,20 +123,18 @@ const Dot: React.FC<{
           type.size * props.sizeRatio * 0.5,
         ],
       }),
-      opacity: animVal.interpolate({
-        inputRange: [0, 1],
-        outputRange: [prevType?.opacity || 0.2, type.opacity],
-      }),
+      opacity: opacity,
     };
   }, [
     animVal,
     dotColor,
+    dotOpacity,
     prevDotColor,
-    prevType?.opacity,
+    prevOpacity,
     prevType?.size,
     props.activeColor,
+    props.opacity,
     props.sizeRatio,
-    type.opacity,
     type.size,
   ]);
 
