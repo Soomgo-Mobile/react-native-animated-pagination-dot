@@ -134,8 +134,8 @@ const Dot: React.FC<{
         {
           margin: 3 * props.sizeRatio,
         },
-        props.activeStyle,
         animStyle,
+        props.activeStyle,
       ]}
     />
   );
