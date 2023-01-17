@@ -3,12 +3,13 @@
  * Converted to Functional component. on 21/09/2021
  */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 
 export const defaultEmptyDotSize = 3;
 
 const EmptyDot: React.FC<{
   sizeRatio: number;
+  inActiveStyle?: ViewStyle;
 }> = (props) => {
   return (
     <View
@@ -19,6 +20,7 @@ const EmptyDot: React.FC<{
           height: defaultEmptyDotSize * props.sizeRatio,
           margin: defaultEmptyDotSize * props.sizeRatio,
         },
+        props.inActiveStyle,
       ]}
     />
   );
