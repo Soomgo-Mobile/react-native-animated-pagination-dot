@@ -26,28 +26,16 @@ import React from 'react'
 import {View} from 'react-native'
 import PaginationDot from 'react-native-animated-pagination-dot'
 
-class ExampleDotPaginate extends React.Component {
-    state={
-        currentPage :0,
-        maxPage:20,
-    };
+const ExampleDotPaginate:React.FC = ()=>{
+    const [curPage] = React.useState(0);
     
-    render(){
-        const {currentPage, maxPage} = this.state;
-        const color = 'black';
-        
-        return (
-            <View style={{flex:1,}}>
-                <PaginationDot 
-                    activeDotColor={color} 
-                    curPage={currentPage} 
-                    maxPage={maxPage}
-                    sizeRatio={1.0}
-                />
-            
-            </View>
-        )
-    }
+    return (
+        <PaginationDot
+            activeDotColor={'black'}
+            curPage={curPage}
+            maxPage={20}
+        />
+    )
 }
 
 export default ExampleDotPaginate;
@@ -56,21 +44,25 @@ export default ExampleDotPaginate;
 -----
 ## Example
 
-<img src="https://user-images.githubusercontent.com/4319422/92298858-39a61d80-ef88-11ea-85dd-e7a4a5c115dc.gif" alt="Pagination Dot Demo" width="320"/>
+<img src="https://user-images.githubusercontent.com/4319422/189922878-7172d48c-8307-47ac-806a-6255f7bd6d3b.gif" alt="Pagination Dot Demo" width="320"/>
 
 -----
 ## API
 
 ### Props
 
-| **Prop**                    | **Type**                    | **Required(Default Value)**  | **Description**                                                |
-| --------------------------- | ----------------------------| ---------------------------- | ---------------------------------------------------            |
-| `curPage`                   | `number`                    | required                     | Pagination curernt Page                                        |
-| `maxPage`                   | `number`                    | required                     | Total Page in Pagination                                       |
-| `activeDotColor`            | `string`                    | required                     | Active Dot Color. dot will control by opacity                  |
-| `sizeRatio`                 | `number`                    | 1.0                          | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
-| `vertical`                  | `boolean`                   | false                        | Dot direction                                         |
+| **Prop**           | **Type**                    | **Required(Default Value)** | **Description**                                                |
+|--------------------| ----------------------------|----------------------------|----------------------------------------------------------------|
+| `curPage`          | `number`                    | required                   | Pagination curernt Page                                        |
+| `maxPage`          | `number`                    | required                   | Total Page in Pagination                                       |
+| `activeDotColor`   | `string`                    | required                   | Active Dot Color. dot will control by opacity                  |
+| `inactiveDotColor` | `string`                    | undefined                  | InActive Dot Color. dot will control by opacity                |
+| `sizeRatio`        | `number`                    | 1.0                        | Customize Dot Size. minimum value is 1.0 (*recommend 1.0 ~ 2.0*) |
+| `vertical`         | `boolean`                   | false                      | Dot direction                                                  |
 
+## Contributing
+
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 
 ## License
@@ -79,4 +71,4 @@ MIT.
 
 ## Author
 
-rouge
+pratt

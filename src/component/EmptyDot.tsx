@@ -1,26 +1,34 @@
 /**
- *
  * Created by rouge on 11/09/2019.
+ * Converted to Functional component. on 21/09/2021
  */
 import React from 'react';
-import {View} from 'react-native';
-import {IPropEmptyDot} from "./types/Dot";
+import { StyleSheet, View } from 'react-native';
 
 export const defaultEmptyDotSize = 3;
 
-
-const EmptyDot = ({ sizeRatio, inActiveStyle }:IPropEmptyDot):React.FunctionComponentElement<IPropEmptyDot>=>{
-
-    return (
-        <View
-            style={ [{
-                backgroundColor: 'white',
-                opacity: 0.0,
-                width: defaultEmptyDotSize * sizeRatio,
-                height: defaultEmptyDotSize * sizeRatio,
-                margin: defaultEmptyDotSize * sizeRatio,
-            }, inActiveStyle] } />
-    )
+const EmptyDot: React.FC<{
+  sizeRatio: number;
+}> = (props) => {
+  return (
+    <View
+      style={[
+        styles.base,
+        {
+          width: defaultEmptyDotSize * props.sizeRatio,
+          height: defaultEmptyDotSize * props.sizeRatio,
+          margin: defaultEmptyDotSize * props.sizeRatio,
+        },
+      ]}
+    />
+  );
 };
+
+const styles = StyleSheet.create({
+  base: {
+    backgroundColor: 'white',
+    opacity: 0.0,
+  },
+});
 
 export default EmptyDot;
