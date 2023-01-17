@@ -109,6 +109,7 @@ const Dot: React.FC<{
         inputRange: [0, 1],
         outputRange: [prevType?.opacity || 0.2, type.opacity],
       }),
+      ...props.activeStyle,
     };
   }, [
     animVal,
@@ -120,6 +121,7 @@ const Dot: React.FC<{
     props.sizeRatio,
     type.opacity,
     type.size,
+    props.activeStyle,
   ]);
 
   if (props.curPage < 3) {
@@ -135,7 +137,6 @@ const Dot: React.FC<{
           margin: 3 * props.sizeRatio,
         },
         animStyle,
-        props.activeStyle,
       ]}
     />
   );
