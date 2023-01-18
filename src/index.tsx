@@ -23,6 +23,8 @@ export interface IDotContainerProps {
   activeDotColor: string;
   inactiveDotColor?: string;
   vertical?: boolean;
+  activeStyle: ViewStyle;
+  inActiveStyle: ViewStyle;
 }
 
 const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
@@ -86,7 +88,14 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
       scrollTo(props.curPage);
   }, [prevPage, props.curPage, props.maxPage, scrollTo]);
 
-  const { curPage, maxPage, activeDotColor, inactiveDotColor } = props;
+  const {
+    curPage,
+    maxPage,
+    activeDotColor,
+    inactiveDotColor,
+    activeStyle,
+    inActiveStyle,
+  } = props;
   const list = useMemo(() => [...Array(maxPage).keys()], [maxPage]);
 
   let normalizedPage = curPage;
@@ -114,6 +123,7 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
               maxPage={maxPage}
               activeColor={activeDotColor}
               inactiveColor={inactiveDotColor}
+              activeStyle={activeStyle}
             />
           );
         })}
@@ -139,8 +149,8 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
         showsHorizontalScrollIndicator={false}
       >
         {/* previous empty dummy dot */}
-        <EmptyDot sizeRatio={sizeRatio} />
-        <EmptyDot sizeRatio={sizeRatio} />
+        <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
+        <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
 
         {list.map((i) => {
           return (
@@ -152,13 +162,14 @@ const DotContainer: React.FC<IDotContainerProps> = (props) => {
               maxPage={maxPage}
               activeColor={activeDotColor}
               inactiveColor={inactiveDotColor}
+              activeStyle={activeStyle}
             />
           );
         })}
 
         {/* previous empty dummy dot */}
-        <EmptyDot sizeRatio={sizeRatio} />
-        <EmptyDot sizeRatio={sizeRatio} />
+        <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
+        <EmptyDot sizeRatio={sizeRatio} inActiveStyle={inActiveStyle} />
       </ScrollView>
     </View>
   );

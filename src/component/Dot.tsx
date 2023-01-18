@@ -5,7 +5,7 @@
  * Converted to Functional component. on 21/09/2021
  */
 import React, { useEffect, useMemo, useState } from 'react';
-import { Animated } from 'react-native';
+import { Animated, ViewStyle } from 'react-native';
 import usePrevious from 'react-use/lib/usePrevious';
 import EmptyDot from './EmptyDot';
 import { getDotStyle } from '../util/DotUtils';
@@ -17,6 +17,7 @@ const Dot: React.FC<{
   activeColor: string;
   inactiveColor?: string;
   sizeRatio: number;
+  activeStyle?: ViewStyle;
 }> = (props) => {
   const [animVal] = useState(new Animated.Value(0));
   const [animate, setAnimate] = useState(false);
@@ -108,6 +109,7 @@ const Dot: React.FC<{
         inputRange: [0, 1],
         outputRange: [prevType?.opacity || 0.2, type.opacity],
       }),
+      ...props.activeStyle,
     };
   }, [
     animVal,
@@ -119,6 +121,7 @@ const Dot: React.FC<{
     props.sizeRatio,
     type.opacity,
     type.size,
+    props.activeStyle,
   ]);
 
   if (props.curPage < 3) {
