@@ -28,6 +28,7 @@ export interface IDotContainerProps {
   activeDotColor: string;
   inactiveDotColor?: string;
   vertical?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const ONE_EMPTY_DOT_SIZE = defaultEmptyDotSize * defaultEmptyDotSize;
@@ -39,6 +40,7 @@ const DotContainer: React.FC<IDotContainerProps> = ({
   activeDotColor,
   inactiveDotColor,
   vertical,
+  containerStyle,
 }) => {
   curPage = I18nManager.isRTL ? maxPage - 1 - curPage : curPage;
   const prevPage = usePrevious(curPage);
@@ -117,7 +119,7 @@ const DotContainer: React.FC<IDotContainerProps> = ({
 
   if (maxPage < 5) {
     return (
-      <View style={container}>
+      <View style={[container, containerStyle]}>
         {list.map((i) => {
           return (
             <Dot
@@ -137,7 +139,7 @@ const DotContainer: React.FC<IDotContainerProps> = ({
 
   return (
     <View
-      style={container}
+      style={[container, containerStyle]}
       onLayout={() => {
         // scroll to right index on initial render
         scrollTo(curPage, false);
