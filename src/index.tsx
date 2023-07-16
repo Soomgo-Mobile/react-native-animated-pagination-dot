@@ -5,13 +5,7 @@
  * Converted to Functional component. on 21/09/2021
  */
 import React, { useCallback, useEffect, useMemo } from 'react';
-import {
-  I18nManager,
-  View,
-  ViewStyle,
-  StyleProp,
-  StyleSheet,
-} from 'react-native';
+import { View, ViewStyle, StyleProp, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -42,7 +36,6 @@ const DotContainer: React.FC<IDotContainerProps> = ({
   vertical,
   containerStyle,
 }) => {
-  curPage = I18nManager.isRTL ? maxPage - 1 - curPage : curPage;
   const prevPage = usePrevious(curPage);
 
   const x = useSharedValue(0);
