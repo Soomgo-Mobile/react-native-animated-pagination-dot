@@ -4,11 +4,17 @@
  * Converted to Typescript on 14/07/2020.
  * Converted to Functional component. on 21/09/2021
  */
-import React, { useEffect, useMemo, useState } from 'react';
-import { Animated } from 'react-native';
+import React, { memo, useEffect, useState } from 'react';
+import Animated, {
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import usePrevious from 'react-use/lib/usePrevious';
-import EmptyDot from './EmptyDot';
 import { getDotStyle } from '../util/DotUtils';
+import EmptyDot from './EmptyDot';
 
 const Dot: React.FC<{
   idx: number;
@@ -17,8 +23,8 @@ const Dot: React.FC<{
   activeColor: string;
   inactiveColor?: string;
   sizeRatio: number;
-}> = (props) => {
-  const [animVal] = useState(new Animated.Value(0));
+}> = memo((props) => {
+  const animVal = useSharedValue(0);
   const [animate, setAnimate] = useState(false);
   const [type, setType] = useState(() =>
     getDotStyle({
@@ -71,43 +77,42 @@ const Dot: React.FC<{
   useEffect(() => {
     if (!animate) return;
 
-    animVal.setValue(0);
-    Animated.timing(animVal, {
-      toValue: 1,
+    animVal.value = 0;
+    animVal.value = withTiming(1, {
       duration: 300,
-      useNativeDriver: false,
-    }).start();
+    });
   }, [animVal, animate, prevType, type]);
 
-  const animStyle = useMemo(() => {
-    const size = animVal.interpolate({
-      inputRange: [0, 1],
-      outputRange: [
-        (prevType?.size || 3) * props.sizeRatio,
-        type.size * props.sizeRatio,
-      ],
-    });
+  const animStyle = useAnimatedStyle(() => {
+    const size = interpolate(
+      animVal.value,
+      [0, 1],
+      [(prevType?.size || 3) * props.sizeRatio, type.size * props.sizeRatio]
+    );
 
-    const backgroundColor = animVal.interpolate({
-      inputRange: [0, 1],
-      outputRange: [prevDotColor ?? props.activeColor, dotColor],
-    });
+    const backgroundColor = interpolateColor(
+      animVal.value,
+      [0, 1],
+      [prevDotColor ?? props.activeColor, dotColor]
+    );
 
     return {
       width: size,
       height: size,
       backgroundColor,
-      borderRadius: animVal.interpolate({
-        inputRange: [0, 1],
-        outputRange: [
+      borderRadius: interpolate(
+        animVal.value,
+        [0, 1],
+        [
           (prevType?.size || 3) * props.sizeRatio * 0.5,
           type.size * props.sizeRatio * 0.5,
-        ],
-      }),
-      opacity: animVal.interpolate({
-        inputRange: [0, 1],
-        outputRange: [prevType?.opacity || 0.2, type.opacity],
-      }),
+        ]
+      ),
+      opacity: interpolate(
+        animVal.value,
+        [0, 1],
+        [prevType?.opacity || 0.2, type.opacity]
+      ),
     };
   }, [
     animVal,
@@ -137,6 +142,6 @@ const Dot: React.FC<{
       ]}
     />
   );
-};
+});
 
 export default Dot;
